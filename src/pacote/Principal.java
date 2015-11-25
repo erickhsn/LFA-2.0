@@ -12,7 +12,7 @@ public class Principal {
 		// TODO Auto-generated method stub
 		try
 		{
-			AFDdoArquivo afdDoArquivo = new AFDdoArquivo("Arquivos/entrada2.txt");
+			AFDdoArquivo afdDoArquivo = new AFDdoArquivo("Arquivos/afd.txt");
 			AFD afd = new AFD(afdDoArquivo);
 			AFDMinimizado afdmin = new AFDMinimizado(afd);
 			afdmin.minimizaEstados();
