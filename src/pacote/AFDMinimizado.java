@@ -36,6 +36,7 @@ public class AFDMinimizado
 				{
 					controle = true;
 					this.conjuntoY = new ConjuntoEstado();
+					//System.out.println("tste "+c.getConjuntoEstado().get(0).getTransicoes());
 					this.e = c.getConjuntoEstado().get(0);
 					this.conjuntoY.getConjuntoEstado().add(this.e);
 					for (Estado d : menosLista(c, this.conjuntoY).getConjuntoEstado()) 
@@ -46,25 +47,48 @@ public class AFDMinimizado
 						}
 						if(controle)this.conjuntoY.getConjuntoEstado().add(d);
 					}
-					
 					c = menosLista(c, this.conjuntoY);
 					this.R.add(this.conjuntoY);
-					System.out.println(c.getConjuntoEstado().size() + " " + this.conjuntoY.getConjuntoEstado().size());
+					//System.out.println(c.getConjuntoEstado().size());
 				}while(c.getConjuntoEstado().size() > 0);
-				
+				//System.out.println("auiq");
 			}
+		
 		}while(R.equals(S));
-		for(int i = 0; i < S.size(); i++)
-			System.out.println(this.S.get(i));
+		System.out.println(R.equals(S));
+		for (int i = 0; i < R.size(); i++) {
+			System.out.println(R.get(i));
+			for (int j = 0; j < R.get(i).getConjuntoEstado().size(); j++) {
+				System.out.println(R.get(i).getConjuntoEstado().get(j).getNomeDoEstado());
+			}
+		}
 	}
 	
 	public ConjuntoEstado menosLista(ConjuntoEstado a1, ConjuntoEstado a2)
 	{
 		ConjuntoEstado temp = new ConjuntoEstado();
-		for(int i = 0; i < a1.getConjuntoEstado().size(); i++)
+		boolean control = true;
+		
+		for (int i = 0; i < a1.getConjuntoEstado().size(); i++, control = true) 
+		{
+			for (int j = 0; j < a2.getConjuntoEstado().size(); j++) 
+			{
+				if(a1.getConjuntoEstado().get(i).getNomeDoEstado().equals(a2.getConjuntoEstado().get(j).getNomeDoEstado()))
+					control = false;
+			}
+			if(control == true)
+				temp.getConjuntoEstado().add(a1.getConjuntoEstado().get(i));
+		}
+		
+		//System.out.println("TEmp"+temp.getConjuntoEstado().size());
+		/*for(int i = 0; i < a1.getConjuntoEstado().size(); i++)
 			for(int j = 0; j < a2.getConjuntoEstado().size(); j++)
-				if(!a1.getConjuntoEstado().get(i).equals(a2.getConjuntoEstado().get(j)))
+			{
+				if(!a1.getConjuntoEstado().get(i).getNomeDoEstado().equals(a2.getConjuntoEstado().get(j).getNomeDoEstado()))
 					temp.getConjuntoEstado().add(a1.getConjuntoEstado().get(i));
+				System.out.println("I: " + i + " J: " + j);
+			}
+		*/
 		return temp;
 	}
 }

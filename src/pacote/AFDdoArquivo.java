@@ -48,15 +48,25 @@ public class AFDdoArquivo
 		for(i = 0; i < this.estado.size(); i++)
 			for(int j = 0; j < this.estadoInicial.size(); j++)
 				if(this.estado.get(i).getNomeDoEstado().equals(this.estadoInicial.get(j)))
+				{
 						this.estado.get(i).seteInicial(true);
+						this.estadoInicial.get(j).setTransicoes(this.estado.get(i).getTransicoes());
+				}
 		
 		
 		linhaEstadoFinal(br.readLine());
 		
 		for(i = 0; i < this.estado.size(); i++)
+		{
 			for(int j = 0; j < this.estadoFinal.size(); j++)
-				if(this.estado.get(i).getNomeDoEstado().equals(this.estadoFinal.get(j)))
+			{
+				if(this.estado.get(i).getNomeDoEstado().equals(this.estadoFinal.get(j).getNomeDoEstado()))
+				{
 						this.estado.get(i).seteFinal(true);
+						this.estadoFinal.get(j).setTransicoes(this.estado.get(i).getTransicoes());
+				}
+			}
+		}
 		//System.out.println(this.estadoFinal.toString());
 	
 	}
